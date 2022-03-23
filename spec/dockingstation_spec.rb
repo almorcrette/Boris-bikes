@@ -4,6 +4,7 @@ require 'bike'
 describe DockingStation do
   it "responses to release_bike" do
     expect(DockingStation.new).to respond_to(:release_bike)
+    expect { raise "No bikes available"}. to raise_error(RuntimeError, "No bikes available")
   end
   
   it "release a bike object which is working when method :release_bike is used" do
