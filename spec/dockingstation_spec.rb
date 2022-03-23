@@ -9,8 +9,23 @@ describe DockingStation do
   it "release a bike object which is working when method :release_bike is used" do
     expect(DockingStation.new.release_bike).to be_working
   end
-    
-    
-  # expect(actual).to be_xxx         # passes if actual.xxx?
-# expect(actual).to have_xxx(:arg) # passes if actual.has_xxx?(:arg)
+
+  it "responds to dock_bike" do
+    expect(DockingStation.new).to respond_to(:dock).with(1).argument
+  end
+  
+  it { is_expected.to respond_to(:bike) }
+
+  it 'docks something' do
+    bike = Bike.new
+    expect(subject.dock(bike)).to eq bike
+  end
+
+  it 'returns docked bikes' do
+    bike = Bike.new
+    subject.dock(bike)
+    expect(subject.bike).to eq bike
+  end
+  # it "docks a bike when dock_bike is call with a bike as argument" do
+  #  expect(DockingStation.new.dock_bike(Bike.new)).to eq
 end
