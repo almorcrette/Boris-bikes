@@ -15,7 +15,7 @@ describe DockingStation do
     expect(DockingStation.new).to respond_to(:dock).with(1).argument
   end
   
-  it { is_expected.to respond_to(:bike) }
+  it { is_expected.to respond_to(:bike_rack) }
 
   it 'docks something' do
     bike = Bike.new
