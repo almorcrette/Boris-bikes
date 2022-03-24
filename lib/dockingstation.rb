@@ -1,12 +1,12 @@
 class DockingStation
-  attr_reader :bike_rack
+  attr_reader :bike_rack, :DEFAULT_CAPACITY
   def initialize
     @bike_rack = []
     @DEFAULT_CAPACITY = 20
   end
 
   def empty?
-    if @bike_rack == nil
+    if @bike_rack.length == 0
       true
     else
       false

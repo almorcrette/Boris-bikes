@@ -2,13 +2,12 @@ require 'dockingstation'
 require 'bike'
 
 describe DockingStation do
-  it "responses to release_bike" do
-    expect(DockingStation.new).to respond_to(:release_bike)
-    expect {subject.release_bike && subject.bike_rack.length >= @DEFAULT_CAPACITY}. to raise_error(RuntimeError, "No bikes available")
-  end
-  
-  it "release a bike object which is working when method :release_bike is used" do
-    expect(DockingStation.new.release_bike).to be_working
+  it "will release a bike if there is one, and raise and error if there are no bikes available" do
+    station = DockingStation.new
+    expect { station.release_bike }. to raise_error(RuntimeError, "No bikes available")
+    bike = Bike.new
+    station.dock(bike)
+    expect(station.release_bike).to be_working
   end
 
   it "responds to dock_bike" do
@@ -24,7 +23,10 @@ describe DockingStation do
   end
 
   it 'rejects docking bike if capacity is full' do
-    expect { raise "Docking station full" }. to raise_error(RuntimeError, "Docking station full")
+    station = DockingStation.new
+    station.DEFAULT_CAPACITY.times { station.dock(Bike.new)}
+    bike = Bike.new
+    expect { station.dock(bike) }. to raise_error(RuntimeError, "Docking station full")
   end
 
   # it "docks a bike when dock_bike is call with a bike as argument" do
