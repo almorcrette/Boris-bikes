@@ -1,5 +1,5 @@
 class DockingStation
-  attr_reader :bike_rack
+  attr_reader :bike_rack, :DEFAULT_CAPACITY
   def initialize
     @bike_rack = []
     @DEFAULT_CAPACITY = 20
