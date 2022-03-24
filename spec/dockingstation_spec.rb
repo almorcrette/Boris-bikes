@@ -7,7 +7,7 @@ describe DockingStation do
   end
   
   it "when releasing bike is attempted, raises an error if dock is empty, otherwise releases a working bike object " do
-    if subject.bike_rack == nil
+    if subject.bike_rack.length == 0
       expect { subject.release_bike }. to raise_error(RuntimeError, "No bikes available")
     else
       expect(DockingStation.new.release_bike).to be_working

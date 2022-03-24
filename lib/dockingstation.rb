@@ -6,7 +6,7 @@ class DockingStation
   end
 
   def empty?
-    if @bike_rack == nil
+    if @bike_rack.length == 0
       true
     else
       false
