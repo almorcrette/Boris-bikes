@@ -7,7 +7,7 @@ describe DockingStation do
     expect { station.release_bike }. to raise_error(RuntimeError, "No bikes available")
     bike = Bike.new
     station.dock(bike)
-    expect(station.release_bike).to be_working
+    expect(station.release_bike).to be_a Bike
   end
 
   it "responds to dock_bike" do
@@ -26,9 +26,20 @@ describe DockingStation do
     station = DockingStation.new
     station.DEFAULT_CAPACITY.times { station.dock(Bike.new)}
     bike = Bike.new
-    expect { station.dock(bike) }. to raise_error(RuntimeError, "Docking station full")
+    expect { station.dock(bike) }.to raise_error(RuntimeError, "Docking station full")
   end
 
-  # it "docks a bike when dock_bike is call with a bike as argument" do
-  #  expect(DockingStation.new.dock_bike(Bike.new)).to eq
+  it 'reports bike as working or broken' do
+    bike = Bike.new
+    bike.working?(false)
+    expect(bike).to have_attributes(:working => false)
+  end
+
+  it "Dockingstation doesn't release broken bikes" do
+    station = DockingStation.new
+    bike = Bike.new
+    bike.working?(false)
+    station.dock(bike)
+    expect { station.release_bike }.to raise_error(RuntimeError, "No working bikes available")
+  end
 end

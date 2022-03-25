@@ -24,15 +24,17 @@ class DockingStation
   def release_bike
     if self.empty?
       raise "No bikes available"
+    elsif self.bike_rack[0].working == false
+      raise "No working bikes available"
     else
-      Bike.new
+      @bike_rack.shift
     end
   end
 
   def dock(bike)
     if self.full?
       raise "Docking station full"
-    else
+    elsif
       @bike_rack.push(bike)
     end
   end
